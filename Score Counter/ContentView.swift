@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    // `@State` allows a variable within to struct to be changed
     @State var score: Int = 0
     @State var showAlert: Bool = false
     
@@ -25,10 +26,9 @@ struct ContentView: View {
                 Button("Score") {
                     score = score + 1
                     if score == 5 {
-                        print(showAlert)
-                        print("Score is equal to 5")
+                        
                         showAlert = true
-                       print(showAlert)
+                       
                     }
                 }
                     
