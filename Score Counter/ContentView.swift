@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     // `@State` allows a variable within to struct to be changed
-    @State var score: Int = 0
-    @State var showAlert: Bool = false
+    @StateObject var viewModel: ScoreCounterViewModel
     
     var body: some View {
         
         NavigationStack {
             VStack {
-                Text(String(score))
+                Text(String(viewModel.score))
                     .font(.title2)
                 
                 Image("patriots")
@@ -24,10 +23,13 @@ struct ContentView: View {
                     .frame(width: 300, height: 300)
                 
                 Button("Score") {
-                    score = score + 1
-                    if score == 5 {
+                    // use the function on the view model called increasScore
+                    // use a function like a property (.score)
+                    viewModel.increaseScore()
+                    
+                    if viewModel.score == 5 {
                         
-                        showAlert = true
+                        viewModel.showAlert = true
                        
                     }
                 }
@@ -35,7 +37,7 @@ struct ContentView: View {
                 .buttonStyle(.borderedProminent)
             }
             .navigationTitle("Score Counter")
-            .alert(isPresented: $showAlert) {
+            .alert(isPresented: $viewModel.showAlert) {
                 Alert(title: Text("Winner is Patroits 🎉"), message: Text("Stay tuned and watch as the Patroits come back after 15 yrs"))
             }
         }
@@ -43,5 +45,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: ScoreCounterViewModel())
 }
