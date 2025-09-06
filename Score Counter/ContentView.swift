@@ -9,14 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     // `@State` allows a variable within to struct to be changed
-    @State var score: Int = 0
-    @State var showAlert: Bool = false
+    // `@StateObject` is a property wrapper that allows users to create a reference within a view that stays active to be used. www.hackingwithswift.com/quick-start/swiftui/what-is-the-stateobject-property-wrapper
+    
+    @StateObject var viewModel: ScoreCounterViewModel
     
     var body: some View {
         
         NavigationStack {
             VStack {
-                Text(String(score))
+                Text(String(viewModel.score))
                     .font(.title2)
                 
                 Image("patriots")
@@ -24,10 +25,12 @@ struct ContentView: View {
                     .frame(width: 300, height: 300)
                 
                 Button("Score") {
-                    score = score + 1
-                    if score == 5 {
+                    
+                    viewModel.increaseScore()
+                    
+                    if viewModel.score == 5 {
                         
-                        showAlert = true
+                        viewModel.showAlert = true
                        
                     }
                 }
@@ -35,7 +38,7 @@ struct ContentView: View {
                 .buttonStyle(.borderedProminent)
             }
             .navigationTitle("Score Counter")
-            .alert(isPresented: $showAlert) {
+            .alert(isPresented: $viewModel.showAlert) {
                 Alert(title: Text("Winner is Patroits 🎉"), message: Text("Stay tuned and watch as the Patroits come back after 15 yrs"))
             }
         }
@@ -43,5 +46,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: ScoreCounterViewModel())
 }
