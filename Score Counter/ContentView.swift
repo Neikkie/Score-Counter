@@ -23,8 +23,7 @@ struct ContentView: View {
                     .frame(width: 300, height: 300)
                 
                 Button("Score") {
-                    // use the function on the view model called increasScore
-                    // use a function like a property (.score)
+                    
                     viewModel.increaseScore()
                     
                     if viewModel.score == 5 {
