@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     // `@State` allows a variable within to struct to be changed
+    // `@StateObject` is used when creating a reference within a view that is being used www.hackingwithswift.com/quick-start/swiftui/what-is-the-stateobject-property-wrapper
+    
     @StateObject var viewModel: ScoreCounterViewModel
     
     var body: some View {
@@ -23,8 +25,7 @@ struct ContentView: View {
                     .frame(width: 300, height: 300)
                 
                 Button("Score") {
-                    // use the function on the view model called increasScore
-                    // use a function like a property (.score)
+                    
                     viewModel.increaseScore()
                     
                     if viewModel.score == 5 {
